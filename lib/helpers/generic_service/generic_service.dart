@@ -18,3 +18,30 @@ class GenericService {
     return apiClient.post(endpoint, headers: headers, data: data);
   }
 }
+// final apiClient = ApiClient('https://api.example.com');
+// final genericService = GenericService(apiClient);
+//
+// void fetchExampleData() async {
+//   try {
+//     final response = await genericService.getData(
+//       '/example-endpoint',
+//       headers: {'Authorization': 'Bearer token'},
+//     );
+//     print(response.data);
+//   } catch (e) {
+//     print('Error: $e');
+//   }
+// }
+//
+// void postExampleData() async {
+//   try {
+//     final response = await genericService.postData(
+//       '/example-endpoint',
+//       headers: {'Authorization': 'Bearer token'},
+//       data: {'key': 'value'},
+//     );
+//     print(response.data);
+//   } catch (e) {
+//     print('Error: $e');
+//   }
+// }
