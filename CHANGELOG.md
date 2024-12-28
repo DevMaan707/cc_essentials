@@ -13,3 +13,7 @@
 ## [0.4.0] - 2024-12-28
 ### Added
 - Added Custom Fonts support.
+
+## [0.4.1] - 2024-12-29
+### Added
+- Added more font styles.
