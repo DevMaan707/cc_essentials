@@ -319,18 +319,6 @@ AdvancedBubbleNotification.show(
 
 ---
 
-## Contributions
-
-Contributions are welcome! Feel free to open issues or submit pull requests.
-
----
-
-**License**
-
-This package is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
 **Author**
 
 - [DevMaan707](https://github.com/DevMaan707)
