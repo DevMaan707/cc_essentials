@@ -4,11 +4,11 @@ import 'package:dio/dio.dart';
 
 typedef ModelMapper<T> = T Function(Map<String, dynamic> data);
 
-class ReactiveController<T> extends get_package.GetxController {
+class GenericController<T> extends get_package.GetxController {
   final Future<Response> Function() fetchData;
   final ModelMapper<T> modelMapper;
 
-  ReactiveController({required this.fetchData, required this.modelMapper});
+  GenericController({required this.fetchData, required this.modelMapper});
 
   final get_package.Rx<T?> data = get_package.Rx<T?>(null);
   final get_package.RxString errorMessage = ''.obs;
