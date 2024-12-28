@@ -54,6 +54,52 @@ flutter pub get
 ---
 
 ## Usage
+### Custom Theme Implementation
+How to Implement in the Parent Project
+ 
+Step 1: Initialize the Theme
+Call `CustomTheme.initialize()` in the `main()` function before running the app to set the necessary colors.
+```dart
+ void main() {
+   CustomTheme.initialize(primary: Colors.teal, accent: Colors.orange);
+   runApp(MyApp());
+ }
+ ```
+
+Step 2: Set the Theme
+Wrap the `MaterialApp` widget with the theme provided by `CustomTheme`.
+```dart
+class MyApp extends StatelessWidget {
+   @override
+   Widget build(BuildContext context) {
+     return MaterialApp(
+      theme: CustomTheme.lightTheme(),
+       darkTheme: CustomTheme.darkTheme(),
+       themeMode: ThemeMode.system, // Use system theme mode
+      home: MyHomePage(),
+    );
+  }
+}
+ ```
+ 
+Step 3: Use Custom Components
+Utilize the Pinput field and other customizable widgets provided by `CustomTheme`.
+ ```dart
+ class MyHomePage extends StatelessWidget {
+   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Custom Theme Example')),
+      body: Center(
+         child: CustomTheme.buildPinput(
+          length: 6,
+         onChanged: (value) => print('Entered: $value'),
+        ),
+      ),
+     );
+  }
+ }
+ ```
 
 ### Navbar Implementation
 
