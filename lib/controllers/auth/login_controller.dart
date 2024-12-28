@@ -1,15 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
+import '../../helpers/errorr_handling/api_response_wrapper.dart';
 import '../../helpers/errorr_handling/error_handling.dart';
 import '../../helpers/logging/logger.dart';
+import '../../services/auth/auth_service.dart';
 import '../../services/shared_preferences/shared_preference_service.dart';
 
-typedef AuthModelMapper = T Function<T>(Map<String, dynamic> data);
+typedef ModelMapper<T> = T Function(Map<String, dynamic> data);
 
 class LoginController extends GetxController {
   final AuthService authService;
-  final AuthModelMapper authModelMapper;
+  final ModelMapper authModelMapper; // Generic model mapper
 
   LoginController({required this.authService, required this.authModelMapper});
 
@@ -32,11 +34,14 @@ class LoginController extends GetxController {
     try {
       this.phoneNumber.value = '+91$phoneNumber';
       final response = await authService.login(this.phoneNumber.value);
-      logger.i(response.body7);
+      logger.i(response.data);
 
       if (response.statusCode == 200) {
-        final authModel = authModelMapper<AuthModel>(response.data);
-        isNewAccount.value = authModel.data.accountExists;
+        final authResponse = ApiResponseWrapper.fromJson(
+          response.data,
+          authModelMapper,
+        );
+        isNewAccount.value = authResponse.data['accountExists'] ?? false;
         return true;
       }
     } on DioException catch (dioError) {
@@ -54,11 +59,14 @@ class LoginController extends GetxController {
         phoneNumber: phoneNumber.value,
         code: code,
       );
-      logger.i(response.body);
+      logger.i(response.data);
 
       if (response.statusCode == 200) {
-        final otpModel = authModelMapper<OtpModel>(response.data);
-        SharedPreferencesService().setToken(otpModel.data.token);
+        final otpResponse = ApiResponseWrapper.fromJson(
+          response.data,
+          authModelMapper,
+        );
+        SharedPreferencesService().setToken(otpResponse.data['token']);
         SharedPreferencesService().setLoggedIn(true);
         return true;
       }
