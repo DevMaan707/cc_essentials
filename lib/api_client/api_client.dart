@@ -7,7 +7,11 @@ class ApiClient {
 
   Future<Response> post(String endpoint,
       {Map<String, dynamic>? headers, Object? data}) async {
-    return _dio.post(endpoint, options: Options(headers: headers), data: data);
+    return _dio.post(
+      endpoint,
+      options: Options(headers: headers),
+      data: data,
+    );
   }
 
   Future<Response> get(String endpoint,

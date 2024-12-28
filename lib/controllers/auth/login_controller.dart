@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-import '../../helpers/errorr_handling/api_response_wrapper.dart';
-import '../../helpers/errorr_handling/error_handling.dart';
+import '../../helpers/apiresponse/api_response_wrapper.dart';
+import '../../helpers/error_handling/error_handling.dart';
 import '../../helpers/logging/logger.dart';
 import '../../services/auth/auth_service.dart';
 import '../../services/shared_preferences/shared_preference_service.dart';
@@ -11,7 +11,7 @@ typedef ModelMapper<T> = T Function(Map<String, dynamic> data);
 
 class LoginController extends GetxController {
   final AuthService authService;
-  final ModelMapper authModelMapper; // Generic model mapper
+  final ModelMapper authModelMapper;
 
   LoginController({required this.authService, required this.authModelMapper});
 
