@@ -1,6 +1,6 @@
 name: cc_essentials
 description: "A new Flutter package project."
-version: 0.0.1
+version: 0.5.0
 homepage:
 
 environment:
@@ -15,6 +15,7 @@ dependencies:
   logger:
   shared_preferences:
   pinput:
+  flutter_screenutil:
 
 dev_dependencies:
   flutter_test:
@@ -22,4 +23,232 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
 flutter:
-
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/Inter_18pt-Black.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-BlackItalic.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Bold.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-BoldItalic.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-ExtraBold.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-ExtraLight.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-ExtraLightItalic.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Italic.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Light.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-LightItalic.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Medium.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-MediumItalic.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Regular.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-SemiBold.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-SemiBoldItalic.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Thin.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-ThinItalic.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-Black.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-BlackItalic.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-Bold.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-BoldItalic.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-ExtraBold.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-ExtraLight.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-ExtraLightItalic.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-Italic.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-Light.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-LightItalic.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-Medium.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-MediumItalic.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-Regular.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-SemiBold.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-SemiBoldItalic.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-Thin.ttf
+        - asset: assets/fonts/Inter/Inter_24pt-ThinItalic.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-Black.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-BlackItalic.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-Bold.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-BoldItalic.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-ExtraBold.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-ExtraLight.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-ExtraLightItalic.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-Italic.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-Light.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-LightItalic.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-Medium.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-MediumItalic.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-Regular.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-SemiBold.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-SemiBoldItalic.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-Thin.ttf
+        - asset: assets/fonts/Inter/Inter_28pt-ThinItalic.ttf
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato/Lato-Black.ttf
+        - asset: assets/fonts/Lato/Lato-BlackItalic.ttf
+        - asset: assets/fonts/Lato/Lato-Bold.ttf
+        - asset: assets/fonts/Lato/Lato-BoldItalic.ttf
+        - asset: assets/fonts/Lato/Lato-Italic.ttf
+        - asset: assets/fonts/Lato/Lato-Light.ttf
+        - asset: assets/fonts/Lato/Lato-LightItalic.ttf
+        - asset: assets/fonts/Lato/Lato-Regular.ttf
+        - asset: assets/fonts/Lato/Lato-Thin.ttf
+        - asset: assets/fonts/Lato/Lato-ThinItalic.ttf
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-BlackItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-BoldItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBold.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLight.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLightItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Italic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-LightItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-MediumItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBold.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Thin.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ThinItalic.ttf
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito/Nunito-Black.ttf
+        - asset: assets/fonts/Nunito/Nunito-BlackItalic.ttf
+        - asset: assets/fonts/Nunito/Nunito-Bold.ttf
+        - asset: assets/fonts/Nunito/Nunito-BoldItalic.ttf
+        - asset: assets/fonts/Nunito/Nunito-ExtraBold.ttf
+        - asset: assets/fonts/Nunito/Nunito-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Nunito/Nunito-ExtraLight.ttf
+        - asset: assets/fonts/Nunito/Nunito-ExtraLightItalic.ttf
+        - asset: assets/fonts/Nunito/Nunito-Italic.ttf
+        - asset: assets/fonts/Nunito/Nunito-Light.ttf
+        - asset: assets/fonts/Nunito/Nunito-LightItalic.ttf
+        - asset: assets/fonts/Nunito/Nunito-Medium.ttf
+        - asset: assets/fonts/Nunito/Nunito-MediumItalic.ttf
+        - asset: assets/fonts/Nunito/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito/Nunito-SemiBold.ttf
+        - asset: assets/fonts/Nunito/Nunito-SemiBoldItalic.ttf
+    - family: NunitoSans
+      fonts:
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-BlackItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-Bold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-BoldItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-ExtraBold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-ExtraLight.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-ExtraLightItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-Italic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-Light.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-LightItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-Medium.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-MediumItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-Regular.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-SemiBold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-SemiBoldItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-Black.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-BlackItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-Bold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-BoldItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-ExtraBold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-ExtraLight.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-ExtraLightItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-Italic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-Light.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-LightItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-Medium.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-MediumItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-Regular.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-SemiBold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Condensed-SemiBoldItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-Black.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-BlackItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-Bold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-BoldItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-ExtraBold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-ExtraLight.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-ExtraLightItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-Italic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-Light.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-LightItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-Medium.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-MediumItalic.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-Regular.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-SemiBold.ttf
+        - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt_Expanded-SemiBoldItalic.ttf
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/Open_Sans/OpenSans-Bold.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-BoldItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-ExtraBold.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-Italic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-Light.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-LightItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-Medium.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-MediumItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-Regular.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-SemiBold.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans-SemiBoldItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-Bold.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-BoldItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-ExtraBold.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-Italic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-Light.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-LightItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-Medium.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-MediumItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-Regular.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-SemiBold.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_Condensed-SemiBoldItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-Bold.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-BoldItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-ExtraBold.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-Italic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-Light.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-LightItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-Medium.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-MediumItalic.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-Regular.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-SemiBold.ttf
+        - asset: assets/fonts/Open_Sans/OpenSans_SemiCondensed-SemiBoldItalic.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Black.ttf
+        - asset: assets/fonts/Poppins/Poppins-BlackItalic.ttf
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins/Poppins-BoldItalic.ttf
+        - asset: assets/fonts/Poppins/Poppins-ExtraBold.ttf
+        - asset: assets/fonts/Poppins/Poppins-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Poppins/Poppins-ExtraLight.ttf
+        - asset: assets/fonts/Poppins/Poppins-ExtraLightItalic.ttf
+        - asset: assets/fonts/Poppins/Poppins-Italic.ttf
+        - asset: assets/fonts/Poppins/Poppins-Light.ttf
+        - asset: assets/fonts/Poppins/Poppins-LightItalic.ttf
+        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins/Poppins-MediumItalic.ttf
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
+        - asset: assets/fonts/Poppins/Poppins-SemiBoldItalic.ttf
+        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
+        - asset: assets/fonts/Poppins/Poppins-ThinItalic.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Black.ttf
+        - asset: assets/fonts/Roboto/Roboto-BlackItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto/Roboto-BoldItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-Italic.ttf
+        - asset: assets/fonts/Roboto/Roboto-Light.ttf
+        - asset: assets/fonts/Roboto/Roboto-LightItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+        - asset: assets/fonts/Roboto/Roboto-MediumItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto/Roboto-Thin.ttf
+        - asset: assets/fonts/Roboto/Roboto-ThinItalic.ttf
