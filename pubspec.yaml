@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   get:
+  dio:
+  logger:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
