@@ -29,5 +29,8 @@
 ## [0.5.2] - 2024-12-29
 ### Added
 - Changed Class name.
+
+## [0.5.3] - 2024-12-29
+### Added
 - added drop down widget
 
