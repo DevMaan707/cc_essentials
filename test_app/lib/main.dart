@@ -1,3 +1,8 @@
+import 'package:cc_essentials/api_client/api_client.dart';
+import 'package:cc_essentials/cc_essentials.dart';
+import 'package:cc_essentials/helpers/generic_controller/generic_controller.dart';
+import 'package:cc_essentials/helpers/generic_service/generic_service.dart';
+import 'package:cc_essentials/helpers/logging/logger.dart';
 import 'package:cc_essentials/theme/custom_theme.dart';
 import 'package:cc_essentials/ui/carousels.dart';
 import 'package:cc_essentials/ui/drop_down.dart';
@@ -7,8 +12,14 @@ import 'package:cc_essentials/ui/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:test_app/exModel.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CCEssentials.initialize(
+      primaryColor: Colors.orange, accentColor: Colors.teal);
+  Get.put(ApiClient('http://..'));
+
   runApp(MyTestApp());
 }
 
@@ -84,17 +95,32 @@ class MyTestApp extends StatelessWidget {
                       ),
                     ),
                     CustomElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final GenericService loginService =
+                            GenericService(Get.find<ApiClient>());
+                        logger.i(
+                            '${countryCodes[selectedIndex.value]["code"]!}${phoneTextController.value.text}');
+                        final loginController = GenericController<Data>(
+                          fetchData: () =>
+                              loginService.postData(endpoint: '/..', data: {
+                            'phone':
+                                '${countryCodes[selectedIndex.value]["code"]!}${phoneTextController.value.text}'
+                          }),
+                          modelMapper: (data) => Data.fromJson(data),
+                        );
+                        await loginController.fetchItems();
+                        logger.i(loginController.data.value?.toJson() ?? '');
+                      },
                       fixedSize: const Size(300, 60),
                       child: Text(
-                        "Hi",
+                        "Next",
                         style: textTheme.bodyLarge!.copyWith(
                           color: Colors.white,
                         ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Column(
                         children: [
                           ReactiveDropdown(
@@ -145,7 +171,6 @@ class MyTestApp extends StatelessWidget {
                                       style: textTheme.bodyLarge,
                                     ),
                                   ),
-                                  //borderColor: Colors.grey,
                                   borderWidth: 1.0,
                                   borderRadius: 25.w,
                                   textStyle: textTheme.bodyLarge,

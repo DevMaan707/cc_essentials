@@ -46,3 +46,7 @@
 ## [0.5.6] - 2024-12-29
 ### Added
 - enhanced banner , chart components , added padding to the dropdown widget, did some theme changes , fixed elevatedbutton and textfield custom implementations
+
+## [0.5.7] - 2024-12-29
+### Fixed
+- Generic controller and generic service and tested

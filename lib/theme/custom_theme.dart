@@ -75,7 +75,7 @@ class CustomTheme {
         ),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: primaryColor,
+        color: accentColor,
       ),
       inputDecorationTheme: _inputDecorationTheme(Brightness.light),
       textSelectionTheme: TextSelectionThemeData(
@@ -106,7 +106,7 @@ class CustomTheme {
         ),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: primaryColor,
+        color: accentColor,
       ),
       inputDecorationTheme: _inputDecorationTheme(Brightness.dark),
       textSelectionTheme: TextSelectionThemeData(

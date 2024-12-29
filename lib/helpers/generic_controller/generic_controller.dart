@@ -1,4 +1,5 @@
 import 'package:cc_essentials/helpers/error_handling/error_handling.dart';
+import 'package:cc_essentials/helpers/logging/logger.dart';
 import 'package:get/get.dart' as get_package;
 import 'package:dio/dio.dart';
 
@@ -18,6 +19,7 @@ class GenericController<T> extends get_package.GetxController {
     isLoading.value = true;
     try {
       final response = await fetchData();
+      logger.i(response.data);
       if (response.statusCode == 200) {
         final rawData = response.data['data'];
         data.value = modelMapper(rawData);
