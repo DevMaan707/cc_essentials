@@ -34,3 +34,7 @@
 ### Added
 - added drop down widget
 
+## [0.5.4] - 2024-12-29
+### Added
+- changed login andregister controller implementation
+- added custom elevated buttons and textfields

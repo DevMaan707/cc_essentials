@@ -20,7 +20,8 @@ class LoginController extends GetxController {
   final RxBool isNewAccount = false.obs;
   final RxString phoneNumber = ''.obs;
 
-  bool validatePhoneNumber(String phoneNumber) {
+  bool validatePhoneNumber(
+      {required String phoneNumber, required String endpoint}) {
     final RegExp phoneRegExp = RegExp(r'^[0-9]{10}$');
     if (!phoneRegExp.hasMatch(phoneNumber)) {
       errorMessage.value = 'Phone number is invalid.';
@@ -29,11 +30,13 @@ class LoginController extends GetxController {
     return true;
   }
 
-  Future<bool> login(String phoneNumber) async {
+  Future<bool> login(
+      {required String phoneNumber, required String endpoint}) async {
     isLoading.value = true;
     try {
       this.phoneNumber.value = '+91$phoneNumber';
-      final response = await authService.login(this.phoneNumber.value);
+      final response = await authService.login(
+          phoneNumber: this.phoneNumber.value, endpoint: endpoint);
       logger.i(response.data);
 
       if (response.statusCode == 200) {
@@ -52,13 +55,12 @@ class LoginController extends GetxController {
     return false;
   }
 
-  Future<bool> verifyOtp(String code) async {
+  Future<bool> verifyOtp(
+      {required String code, required String endpoint}) async {
     isLoading.value = true;
     try {
       final response = await authService.verify(
-        phoneNumber: phoneNumber.value,
-        code: code,
-      );
+          phoneNumber: phoneNumber.value, code: code, endpoint: endpoint);
       logger.i(response.data);
 
       if (response.statusCode == 200) {

@@ -6,13 +6,15 @@ class AuthService {
 
   AuthService(this.apiClient);
 
-  Future<Response> login(String phoneNumber) {
-    const String endpoint = '/v1/auth/phone_login';
+  Future<Response> login(
+      {required String phoneNumber, required String endpoint}) {
     return apiClient.post(endpoint, data: {"phone": phoneNumber});
   }
 
-  Future<Response> verify({required String phoneNumber, required String code}) {
-    const String endpoint = '/v1/auth/phone_verify_otp';
+  Future<Response> verify(
+      {required String phoneNumber,
+      required String code,
+      required String endpoint}) {
     return apiClient.post(endpoint, data: {"phone": phoneNumber, "otp": code});
   }
 
@@ -21,7 +23,8 @@ class AuthService {
     return apiClient.get(endpoint);
   }
 
-  Future<Response> register({required Map<String, dynamic> userData}) {
+  Future<Response> register(
+      {required Map<String, dynamic> userData, required String endpoint}) {
     const String endpoint = '/v1/auth/register';
     return apiClient.post(endpoint, data: userData);
   }

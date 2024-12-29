@@ -33,12 +33,13 @@ class RegisterController extends GetxController {
     }
   }
 
-  Future<bool> registerUser({
-    required Map<String, dynamic> userData,
-  }) async {
+  Future<bool> registerUser(
+      {required Map<String, dynamic> userData,
+      required String endpoint}) async {
     isLoading.value = true;
     try {
-      final response = await authService.register(userData: userData);
+      final response =
+          await authService.register(userData: userData, endpoint: endpoint);
       if (response.statusCode == 200 || response.statusCode == 201) {
         success.value = true;
         return true;
@@ -64,21 +65,3 @@ class RegisterController extends GetxController {
     Get.snackbar('Error', errorMessage);
   }
 }
-// void main() {
-//   final authService = AuthService();
-//
-//   final registerController = RegisterController(
-//     authService: authService,
-//     regionMapper: (data) => RegionModel.fromJson(data), // Project-specific mapper
-//   );
-//
-//   // Fetch regions
-//   registerController.fetchRegions();
-//
-//   // Register a user
-//   registerController.registerUser(userData: {
-//     'name': 'John Doe',
-//     'email': 'johndoe@example.com',
-//     'password': 'securePassword123',
-//   });
-// }
