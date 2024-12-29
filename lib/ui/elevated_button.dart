@@ -1,3 +1,4 @@
+import 'package:cc_essentials/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.enabledBorderRadius = 8.0,
     this.enabledBorderColor = Colors.transparent,
     this.fixedSize,
-    this.backgroundColor = Colors.blue,
+    this.backgroundColor = Colors.transparent,
     this.disabledBackgroundColor = Colors.grey,
     this.foregroundColor = Colors.white,
     this.disabledForegroundColor = Colors.white54,
@@ -30,6 +31,9 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final finalBackgroundColor = backgroundColor == Colors.transparent
+        ? GlobalColors.primaryColor
+        : backgroundColor;
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
@@ -38,7 +42,7 @@ class CustomElevatedButton extends StatelessWidget {
             if (states.contains(WidgetState.disabled)) {
               return disabledBackgroundColor;
             }
-            return backgroundColor;
+            return finalBackgroundColor;
           },
         ),
         foregroundColor: WidgetStateProperty.resolveWith<Color>(

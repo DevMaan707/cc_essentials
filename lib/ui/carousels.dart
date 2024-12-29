@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class BannerCarousel extends StatelessWidget {
+class BannerCarousel extends StatefulWidget {
   final double height;
   final double width;
   final Color dotColor;
@@ -17,7 +17,7 @@ class BannerCarousel extends StatelessWidget {
   final double borderRadius;
 
   const BannerCarousel({
-    Key? key,
+    super.key,
     required this.height,
     required this.width,
     this.dotColor = Colors.grey,
@@ -30,40 +30,45 @@ class BannerCarousel extends StatelessWidget {
     required this.urlsToNavigate,
     this.margin,
     this.borderRadius = 16.0,
-  })  : assert(imageUrls.length == urlsToNavigate.length,
-            'Each image must have a corresponding URL to navigate.'),
-        super(key: key);
+  }) : assert(imageUrls.length == urlsToNavigate.length,
+            'Each image must have a corresponding URL to navigate.');
+
+  @override
+  State<BannerCarousel> createState() => _BannerCarouselState();
+}
+
+class _BannerCarouselState extends State<BannerCarousel> {
+  int _currentIndex = 0;
 
   Future<void> _navigateToUrl(String url) async {
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-    } else {
-      throw 'Could not launch $url';
-    }
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: margin ?? const EdgeInsets.all(16.0),
+      padding: widget.margin ?? const EdgeInsets.all(16.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           CarouselSlider.builder(
-            itemCount: imageUrls.length,
+            itemCount: widget.imageUrls.length,
             itemBuilder: (context, index, realIndex) {
               return GestureDetector(
-                onTap: () => _navigateToUrl(urlsToNavigate[index]),
+                onTap: () => _navigateToUrl(widget.urlsToNavigate[index]),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
                   child: Image.network(
-                    imageUrls[index],
+                    widget.imageUrls[index],
                     fit: BoxFit.cover,
-                    height: height,
-                    width: width,
+                    width: widget.width,
+                    height: widget.height,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
-                      return Center(
+                      return Container(
+                        width: widget.width,
+                        height: widget.height,
+                        alignment: Alignment.center,
                         child: CircularProgressIndicator(
                           value: loadingProgress.expectedTotalBytes != null
                               ? loadingProgress.cumulativeBytesLoaded /
@@ -72,38 +77,49 @@ class BannerCarousel extends StatelessWidget {
                         ),
                       );
                     },
-                    errorBuilder: (context, error, stackTrace) => Center(
-                      child: Icon(Icons.error, color: Colors.red, size: 50),
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      width: widget.width,
+                      height: widget.height,
+                      color: Colors.grey[200],
+                      child: const Center(
+                        child: Icon(Icons.error, color: Colors.red, size: 50),
+                      ),
                     ),
                   ),
                 ),
               );
             },
             options: CarouselOptions(
-              autoPlay: autoScroll,
-              height: height,
-              viewportFraction: 0.9,
+              autoPlay: widget.autoScroll,
+              height: widget.height,
+              viewportFraction: 0.85,
               enableInfiniteScroll: true,
               enlargeCenterPage: true,
-              autoPlayCurve: Curves.easeInOut,
-              autoPlayAnimationDuration: const Duration(seconds: 2),
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
             ),
           ),
-          if (dotsVisible)
+          if (widget.dotsVisible)
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: 12.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: imageUrls.asMap().entries.map((entry) {
-                  return Container(
-                    width: dotSize,
-                    height: dotSize,
+                children: widget.imageUrls.asMap().entries.map((entry) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    width: _currentIndex == entry.key
+                        ? widget.dotSize * 1.5
+                        : widget.dotSize,
+                    height: widget.dotSize,
                     margin: const EdgeInsets.symmetric(horizontal: 4.0),
                     decoration: BoxDecoration(
-                      shape: dotShape,
-                      color: entry.key == CarouselOptions().initialPage
-                          ? activeDotColor
-                          : dotColor,
+                      shape: widget.dotShape,
+                      color: _currentIndex == entry.key
+                          ? widget.activeDotColor
+                          : widget.dotColor,
                     ),
                   );
                 }).toList(),

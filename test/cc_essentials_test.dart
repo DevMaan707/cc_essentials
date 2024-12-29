@@ -1,6 +1,5 @@
 import 'package:cc_essentials/ui/carousels.dart';
 import 'package:cc_essentials/ui/line_chart.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -10,20 +9,19 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-              body: ModernLineChart(
-            title: 'Sample Line Chart',
-            subTitle: 'Testing Subtitle',
-            xAxisLabels: const ['Jan', 'Feb', 'Mar'],
-            yAxisLabels: const ['10', '20', '30'],
-            dataPoints: const [
-              FlSpot(0, 15),
-              FlSpot(1, 25),
-              FlSpot(2, 20),
-            ],
-            lineColor: Colors.blue,
-            gridColor: Colors.grey[300]!,
-            dotColor: Colors.red,
-          )),
+            body: ModernLineChart(
+              dataPoints: const [15, 25, 20, 30, 40],
+              xAxisLabels: const ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+              title: 'Sales Overview',
+              subTitle: 'Monthly data representation',
+              lineColor: Colors.teal,
+              gridColor: Colors.grey[300]!,
+              titleColor: Colors.black87,
+              subTitleColor: Colors.grey,
+              dotColor: Colors.redAccent,
+              chartHeight: 350,
+            ),
+          ),
         ),
       );
       expect(find.text('Sample Line Chart'), findsOneWidget);

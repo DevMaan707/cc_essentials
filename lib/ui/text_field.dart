@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cc_essentials/theme/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final Rx<TextEditingController> controller;
@@ -12,6 +13,7 @@ class CustomTextField extends StatelessWidget {
 
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final Color? enabledBorderColor;
   final Color? borderColor;
   final double? borderWidth;
   final double? borderRadius;
@@ -34,6 +36,7 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.borderColor,
+    this.enabledBorderColor,
     this.borderWidth,
     this.borderRadius,
     this.fillColor,
@@ -57,6 +60,7 @@ class CustomTextField extends StatelessWidget {
             minLines: minLines,
             obscureText: obscureText,
             style: textStyle,
+            cursorColor: GlobalColors.primaryColor,
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: hintStyle,
@@ -73,7 +77,7 @@ class CustomTextField extends StatelessWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: borderColor ?? Theme.of(context).primaryColor,
+                  color: borderColor ?? GlobalColors.primaryColor,
                   width: borderWidth ?? 1.0,
                 ),
                 borderRadius: BorderRadius.circular(borderRadius ?? 8.0),

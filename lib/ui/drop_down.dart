@@ -21,7 +21,7 @@ class ReactiveDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
           border: Border.all(color: Colors.grey.shade400),

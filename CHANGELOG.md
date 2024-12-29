@@ -42,3 +42,7 @@
 ## [0.5.5] - 2024-12-29
 ### Added
 - added banner and chart components
+
+## [0.5.6] - 2024-12-29
+### Added
+- enhanced banner , chart components , added padding to the dropdown widget, did some theme changes , fixed elevatedbutton and textfield custom implementations

@@ -2,43 +2,90 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class ModernLineChart extends StatelessWidget {
-  final List<FlSpot> dataPoints;
+  final List<double> dataPoints;
   final List<String> xAxisLabels;
-  final List<String> yAxisLabels;
   final String title;
   final String subTitle;
   final Color lineColor;
+  final double lineThickness;
   final Color gridColor;
   final Color titleColor;
   final Color subTitleColor;
   final Color dotColor;
+  final double dotRadius;
+  final double chartHeight;
+  final Color backgroundColor;
+  final Color borderColor;
+  final Color labelColor;
+  final double borderRadius;
+  final bool addShadows;
+  final bool showPoints;
 
   const ModernLineChart({
     super.key,
     required this.dataPoints,
     required this.xAxisLabels,
-    required this.yAxisLabels,
     required this.title,
     required this.subTitle,
     this.lineColor = Colors.blue,
+    this.lineThickness = 2.0,
     this.gridColor = Colors.grey,
-    this.titleColor = Colors.black,
+    this.titleColor = Colors.white,
     this.subTitleColor = Colors.grey,
-    this.dotColor = Colors.blueAccent,
+    this.dotColor = Colors.red,
+    this.dotRadius = 3.0,
+    this.chartHeight = 300,
+    this.backgroundColor = Colors.black,
+    this.borderColor = Colors.transparent,
+    this.labelColor = Colors.grey,
+    this.borderRadius = 16.0,
+    this.addShadows = true,
+    this.showPoints = true,
   });
+
+  List<FlSpot> _convertDataPoints() {
+    return List.generate(
+      dataPoints.length,
+      (index) => FlSpot(index.toDouble(), dataPoints[index]),
+    );
+  }
+
+  double get maxY =>
+      (dataPoints.isNotEmpty
+          ? dataPoints.reduce((a, b) => a > b ? a : b)
+          : 0.0) *
+      1.2;
+
+  double get minY =>
+      (dataPoints.isNotEmpty
+          ? dataPoints.reduce((a, b) => a < b ? a : b)
+          : 0.0) *
+      0.8;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(borderRadius),
+        boxShadow: addShadows
+            ? [
+                BoxShadow(
+                  color: lineColor.withOpacity(0.4),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                ),
+              ]
+            : [],
+      ),
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title and Subtitle
           Text(
             title,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
               color: titleColor,
             ),
@@ -52,23 +99,31 @@ class ModernLineChart extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          // Chart
           SizedBox(
-            height: 300,
+            height: chartHeight,
             child: LineChart(
               LineChartData(
-                backgroundColor: Colors.white,
+                minY: minY,
+                maxY: maxY,
                 titlesData: FlTitlesData(
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
+                      reservedSize: 40,
                       getTitlesWidget: (value, meta) {
                         final index = value.toInt();
-                        return Text(
-                          index >= 0 && index < xAxisLabels.length
-                              ? xAxisLabels[index]
-                              : '',
-                          style: TextStyle(fontSize: 12, color: Colors.black),
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: Text(
+                            index >= 0 && index < xAxisLabels.length
+                                ? xAxisLabels[index]
+                                : '',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: labelColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         );
                       },
                     ),
@@ -76,55 +131,69 @@ class ModernLineChart extends StatelessWidget {
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 30,
+                      reservedSize: 32,
                       getTitlesWidget: (value, meta) {
-                        final index = value.toInt();
                         return Text(
-                          index >= 0 && index < yAxisLabels.length
-                              ? yAxisLabels[index]
-                              : '',
-                          style: TextStyle(fontSize: 12, color: Colors.black),
+                          value.toStringAsFixed(1),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: labelColor,
+                          ),
                         );
                       },
                     ),
                   ),
-                  topTitles:
-                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  rightTitles:
-                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false)),
+                  rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false)),
                 ),
                 borderData: FlBorderData(
                   show: true,
-                  border: Border.all(color: gridColor, width: 1),
+                  border: Border.all(color: borderColor, width: 1),
                 ),
                 gridData: FlGridData(
                   show: true,
+                  drawHorizontalLine: true,
+                  drawVerticalLine: true,
                   getDrawingHorizontalLine: (value) => FlLine(
-                      color: gridColor.withOpacity(0.2), strokeWidth: 0.8),
+                    color: gridColor.withOpacity(0.2),
+                    strokeWidth: 0.6,
+                  ),
                   getDrawingVerticalLine: (value) => FlLine(
-                      color: gridColor.withOpacity(0.2), strokeWidth: 0.8),
+                    color: gridColor.withOpacity(0.2),
+                    strokeWidth: 0.6,
+                  ),
                 ),
                 lineBarsData: [
                   LineChartBarData(
                     isCurved: true,
                     color: lineColor,
-                    barWidth: 3,
+                    barWidth: lineThickness,
                     belowBarData: BarAreaData(
                       show: true,
-                      color: lineColor.withOpacity(0.2),
+                      color: lineColor.withOpacity(0.4),
+                      gradient: LinearGradient(
+                        colors: [
+                          lineColor.withOpacity(0.1),
+                          lineColor.withOpacity(0.4),
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
                     ),
                     dotData: FlDotData(
-                      show: true,
+                      show: showPoints,
                       getDotPainter: (spot, percent, barData, index) {
                         return FlDotCirclePainter(
-                          radius: 4,
+                          radius: dotRadius,
                           color: dotColor,
                           strokeWidth: 2,
-                          strokeColor: Colors.white,
+                          strokeColor: backgroundColor,
                         );
                       },
                     ),
-                    spots: dataPoints,
+                    spots: _convertDataPoints(),
                   ),
                 ],
               ),
