@@ -29,7 +29,6 @@ class CustomTheme {
       colorScheme: ColorScheme.light(
         primary: primaryColor,
         secondary: accentColor,
-        background: lightBackgroundColor,
         error: errorColor,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -60,7 +59,6 @@ class CustomTheme {
       colorScheme: ColorScheme.dark(
         primary: primaryColor,
         secondary: accentColor,
-        background: darkBackgroundColor,
         error: errorColor,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(

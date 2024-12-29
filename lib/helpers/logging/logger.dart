@@ -7,6 +7,5 @@ final logger = Logger(
     lineLength: 200,
     colors: true,
     printEmojis: true,
-    printTime: false,
   ),
 );
