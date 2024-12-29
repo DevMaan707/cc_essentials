@@ -49,4 +49,4 @@
 
 ## [0.5.7] - 2024-12-29
 ### Fixed
-- Generic controller and generic service and tested
+- fixed Generic controller and generic service and tested
