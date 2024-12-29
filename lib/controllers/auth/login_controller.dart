@@ -44,7 +44,7 @@ class LoginController extends GetxController {
           response.data,
           authModelMapper,
         );
-        isNewAccount.value = authResponse.data['accountExists'] ?? false;
+        isNewAccount.value = (authResponse.data as dynamic).accountExists;
         return true;
       }
     } on DioException catch (dioError) {
@@ -68,7 +68,8 @@ class LoginController extends GetxController {
           response.data,
           authModelMapper,
         );
-        SharedPreferencesService().setToken(otpResponse.data['token']);
+        SharedPreferencesService()
+            .setToken((otpResponse.data as dynamic).token);
         SharedPreferencesService().setLoggedIn(true);
         return true;
       }

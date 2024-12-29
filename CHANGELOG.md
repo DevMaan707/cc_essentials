@@ -38,3 +38,7 @@
 ### Added
 - changed login andregister controller implementation
 - added custom elevated buttons and textfields
+
+## [0.5.5] - 2024-12-29
+### Added
+- added banner and chart components

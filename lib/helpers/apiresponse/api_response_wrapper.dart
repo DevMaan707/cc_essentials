@@ -1,22 +1,22 @@
 class ApiResponseWrapper<T> {
+  final bool success;
   final T data;
   final String? message;
-  final bool success;
 
   ApiResponseWrapper({
+    required this.success,
     required this.data,
     this.message,
-    required this.success,
   });
 
   factory ApiResponseWrapper.fromJson(
     Map<String, dynamic> json,
-    T Function(Map<String, dynamic>) fromJsonT,
+    T Function(Map<String, dynamic>) modelMapper,
   ) {
     return ApiResponseWrapper<T>(
-      data: fromJsonT(json['data']),
-      message: json['message'],
-      success: json['success'] ?? true,
+      success: json['success'] as bool,
+      data: modelMapper(json['data'] as Map<String, dynamic>),
+      message: json['message'] as String?,
     );
   }
 }
