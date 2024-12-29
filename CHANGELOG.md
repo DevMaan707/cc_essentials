@@ -25,3 +25,9 @@
 ## [0.5.1] - 2024-12-29
 ### Added
 - Added initialize code.
+
+## [0.5.2] - 2024-12-29
+### Added
+- Changed Class name.
+- added drop down widget
+

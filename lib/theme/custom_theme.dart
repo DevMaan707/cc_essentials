@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
 class CustomTheme {
@@ -105,7 +106,8 @@ class CustomTheme {
     );
   }
 
-  static Pinput buildPinput({
+  static Pinput buildReactivePinput({
+    required RxString rxValue,
     int length = 4,
     double fieldWidth = 50.0,
     double fieldHeight = 56.0,
@@ -113,11 +115,16 @@ class CustomTheme {
     Color? defaultColor,
     Color? focusedColor,
     Color? errorColor,
-    Function(String)? onChanged,
+    VoidCallback? onComplete,
   }) {
     return Pinput(
       length: length,
-      onChanged: onChanged,
+      onChanged: (value) {
+        rxValue.value = value;
+        if (value.length == length && onComplete != null) {
+          onComplete();
+        }
+      },
       defaultPinTheme: PinTheme(
         width: fieldWidth,
         height: fieldHeight,
