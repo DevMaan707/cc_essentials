@@ -17,3 +17,11 @@
 ## [0.4.1] - 2024-12-29
 ### Added
 - Added more font styles.
+
+## [0.5.0] - 2024-12-29
+### Added
+- Added Splash screen.
+
+## [0.5.1] - 2024-12-29
+### Added
+- Added initialize code.

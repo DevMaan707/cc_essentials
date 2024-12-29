@@ -18,7 +18,7 @@ class SplashScreen extends StatefulWidget {
     super.key,
     required this.mainImage,
     this.bottomImage,
-    this.mainImageSize = 100.0,
+    this.mainImageSize = 300,
     this.bottomImageSize,
     this.textBelowMainImage,
     this.delay = const Duration(seconds: 3),
