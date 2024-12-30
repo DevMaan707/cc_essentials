@@ -8,6 +8,9 @@ class ReactiveDropdown extends StatelessWidget {
   final double borderRadius;
   final TextStyle? textStyle;
 
+  final double? width;
+  final double? height;
+
   const ReactiveDropdown({
     super.key,
     required this.selectedIndex,
@@ -15,6 +18,8 @@ class ReactiveDropdown extends StatelessWidget {
     this.dropdownColor,
     this.borderRadius = 12.0,
     this.textStyle,
+    this.width,
+    this.height,
   });
 
   @override
@@ -22,6 +27,8 @@ class ReactiveDropdown extends StatelessWidget {
     return Obx(() {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
           border: Border.all(color: Colors.grey.shade400),

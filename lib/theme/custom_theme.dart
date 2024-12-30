@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:pinput/pinput.dart';
 
 enum FontFamily {
   inter,
@@ -180,52 +178,6 @@ class CustomTheme {
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8.0),
         borderSide: BorderSide(color: errorColor),
-      ),
-    );
-  }
-
-  static Pinput buildReactivePinput({
-    required RxString rxValue,
-    int length = 4,
-    double fieldWidth = 50.0,
-    double fieldHeight = 56.0,
-    double borderRadius = 8.0,
-    Color? defaultColor,
-    Color? focusedColor,
-    Color? errorColor,
-    VoidCallback? onComplete,
-  }) {
-    return Pinput(
-      length: length,
-      onChanged: (value) {
-        rxValue.value = value;
-        if (value.length == length && onComplete != null) {
-          onComplete();
-        }
-      },
-      defaultPinTheme: PinTheme(
-        width: fieldWidth,
-        height: fieldHeight,
-        decoration: BoxDecoration(
-          border: Border.all(color: defaultColor ?? Colors.grey),
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-      ),
-      focusedPinTheme: PinTheme(
-        width: fieldWidth,
-        height: fieldHeight,
-        decoration: BoxDecoration(
-          border: Border.all(color: focusedColor ?? CustomTheme.primaryColor),
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-      ),
-      errorPinTheme: PinTheme(
-        width: fieldWidth,
-        height: fieldHeight,
-        decoration: BoxDecoration(
-          border: Border.all(color: errorColor ?? CustomTheme.errorColor),
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
       ),
     );
   }

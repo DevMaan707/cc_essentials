@@ -50,3 +50,13 @@
 ## [0.5.7] - 2024-12-29
 ### Fixed
 - fixed Generic controller and generic service and tested
+
+## [0.5.8] - 2024-12-29
+### Added
+- added pinput widget
+
+## [0.5.9] - 2024-12-29
+### Added
+- added bottomsheet for otp entering with pinput
+- added navigation service
+- moved the pinput implementation from the custom theme and made it a component
