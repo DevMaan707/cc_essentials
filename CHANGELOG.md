@@ -60,3 +60,12 @@
 - added bottomsheet for otp entering with pinput
 - added navigation service
 - moved the pinput implementation from the custom theme and made it a component
+
+## [0.6.0] - 2025-1-1
+### Added
+- added color, border radius parameters for drop down widget
+- added reactive bool for controlling isLoading in customelevatedbuttons
+### Fixed
+- fixed error logging in generic controller
+### Removed
+- removed login_controller and register controllers
