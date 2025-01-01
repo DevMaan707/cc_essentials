@@ -30,6 +30,7 @@ class GenericController<T> extends get_package.GetxController {
     } on DioException catch (dioError) {
       handleDioError(dioError);
     } catch (e) {
+      logger.e(e.toString());
       errorMessage.value = e.toString();
     } finally {
       isLoading.value = false;
