@@ -24,12 +24,13 @@ class GenericController<T> extends get_package.GetxController {
         final rawData = response.data['data'];
         data.value = modelMapper(rawData);
       } else {
-        errorMessage.value = 'Failed to fetch items. Please try again.';
+        errorMessage.value =
+            'Error with error code:${response.statusCode} bearing message : ${response.statusMessage}\n${response.data}';
       }
     } on DioException catch (dioError) {
       handleDioError(dioError);
     } catch (e) {
-      errorMessage.value = 'An unexpected error occurred.';
+      errorMessage.value = e.toString();
     } finally {
       isLoading.value = false;
     }

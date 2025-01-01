@@ -5,18 +5,21 @@ class ReactiveDropdown extends StatelessWidget {
   final RxInt selectedIndex;
   final List<Widget> items;
   final Color? dropdownColor;
-  final double borderRadius;
+  final double? borderRadius;
   final TextStyle? textStyle;
 
   final double? width;
   final double? height;
+
+  static const double _defaultBorderRadius = 12.0;
+  static const Color _defaultBorderColor = Colors.grey;
 
   const ReactiveDropdown({
     super.key,
     required this.selectedIndex,
     required this.items,
     this.dropdownColor,
-    this.borderRadius = 12.0,
+    this.borderRadius,
     this.textStyle,
     this.width,
     this.height,
@@ -30,8 +33,9 @@ class ReactiveDropdown extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadius),
-          border: Border.all(color: Colors.grey.shade400),
+          borderRadius:
+              BorderRadius.circular(borderRadius ?? _defaultBorderRadius),
+          border: Border.all(color: _defaultBorderColor),
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<int>(
@@ -41,7 +45,10 @@ class ReactiveDropdown extends StatelessWidget {
               items.length,
               (index) => DropdownMenuItem<int>(
                 value: index,
-                child: items[index],
+                child: DefaultTextStyle(
+                  style: textStyle ?? Theme.of(context).textTheme.bodyMedium!,
+                  child: items[index],
+                ),
               ),
             ),
             onChanged: (value) {
@@ -49,9 +56,13 @@ class ReactiveDropdown extends StatelessWidget {
                 selectedIndex.value = value;
               }
             },
-            dropdownColor: dropdownColor ?? Colors.white,
-            borderRadius: BorderRadius.circular(borderRadius),
-            icon: const Icon(Icons.arrow_drop_down),
+            dropdownColor: dropdownColor ?? Theme.of(context).cardColor,
+            borderRadius:
+                BorderRadius.circular(borderRadius ?? _defaultBorderRadius),
+            icon: Icon(
+              Icons.arrow_drop_down,
+              color: textStyle?.color ?? Theme.of(context).iconTheme.color,
+            ),
           ),
         ),
       );
