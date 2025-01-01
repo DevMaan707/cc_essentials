@@ -69,3 +69,7 @@
 - fixed error logging in generic controller
 ### Removed
 - removed login_controller and register controllers
+
+## [0.6.1] - 2024-12-29
+### Added
+- API logs
