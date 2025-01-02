@@ -22,6 +22,7 @@ class GenericController<T> extends get_package.GetxController {
       logger.i(response.data);
       if (response.statusCode == 200) {
         final rawData = response.data['data'];
+        logger.i("RAW $rawData");
         data.value = modelMapper(rawData);
       } else {
         errorMessage.value =
