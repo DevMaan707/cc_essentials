@@ -24,7 +24,7 @@ void main() async {
     accentColor: Colors.teal,
     navigatorKey: navigatorKey,
   );
-  Get.put(ApiClient('http://..'));
+  Get.put(ApiClient('http://wedzing-backend-offline.coffeecodes.in'));
 
   runApp(const MyTestApp());
 }
@@ -50,6 +50,7 @@ class MyTestApp extends StatelessWidget {
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+  final RxBool isLoading = false.obs;
   final RxInt selectedIndex = 0.obs;
   final Rx<TextEditingController> phoneTextController =
       TextEditingController().obs;
@@ -165,30 +166,44 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             CustomElevatedButton(
-              onPressed: () async {
-                final GenericService loginService =
-                    GenericService(Get.find<ApiClient>());
-                logger.i(
-                    '${countryCodes[selectedIndex.value]["code"]!}${phoneTextController.value.text}');
-                final loginController = GenericController<Data>(
-                  fetchData: () =>
-                      loginService.postData(endpoint: '/..', data: {
-                    'phone':
-                        '${countryCodes[selectedIndex.value]["code"]!}${phoneTextController.value.text}'
-                  }),
-                  modelMapper: (data) => Data.fromJson(data),
-                );
-                await loginController.fetchItems();
-                logger.i(loginController.data.value?.toJson() ?? '');
-              },
-              fixedSize: const Size(300, 60),
-              child: Text(
-                "Next",
-                style: textTheme.bodyLarge!.copyWith(
-                  color: Colors.white,
-                ),
-              ),
-            ),
+                onPressed: () async {
+                  try {
+                    isLoading.value = true;
+                    final GenericService loginService =
+                        GenericService(Get.find<ApiClient>());
+                    logger.i(
+                        '${countryCodes[selectedIndex.value]["code"]!}${phoneTextController.value.text}');
+                    final loginController = GenericController<Data>(
+                      fetchData: () => loginService
+                          .postData(endpoint: '/v1/auth/provider/login', data: {
+                        'phone':
+                            '${countryCodes[selectedIndex.value]["code"]!}${phoneTextController.value.text}'
+                      }),
+                      model: (data) => Data.fromJson(data),
+                    );
+                    await loginController.fetchItems();
+                    logger.i(loginController.data.value?.toJson() ?? '');
+                    isLoading.value = false;
+                  } catch (e) {
+                    logger.i(e);
+                  } finally {
+                    isLoading.value = false;
+                  }
+                },
+                fixedSize: const Size(300, 60),
+                child: Obx(() {
+                  return (isLoading.value)
+                      ? SizedBox(
+                          width: 20.w,
+                          height: 20.h,
+                          child: const CircularProgressIndicator())
+                      : Text(
+                          "Next",
+                          style: textTheme.bodyLarge!.copyWith(
+                            color: Colors.white,
+                          ),
+                        );
+                })),
             Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -248,6 +263,54 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                   ),
+                  CustomElevatedButton(
+                      onPressed: () async {
+                        try {
+                          final GenericService bookingService =
+                              GenericService(Get.find<ApiClient>());
+
+                          final bookingController =
+                              GenericController<BookingData>(
+                            fetchData: () => bookingService.getData(
+                              endpoint: '/v1/bookings/provider',
+                              headers: {
+                                'Authorization':
+                                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lcmFsYXVkYUBzYWJzZWJhZGEuY29tIiwiZXhwIjoxNzM4NDI4ODAyLCJwaG9uZSI6Iis5MTk2NjIxMDU3MTAiLCJyb2xlIjoicHJvdmlkZXIiLCJ1aWQiOiI1MzB5MWw3NzhyIn0.l7Eb4M3BsBV97Dj6WVE8DmB_0r-0ypjpdzHSz9heoD8',
+                              },
+                            ),
+                            model: (json) => BookingData.fromJson(json),
+                          );
+
+                          await bookingController.fetchItems();
+
+                          if (bookingController.listData.isNotEmpty) {
+                            bookingController.listData.forEach((booking) {
+                              logger.i(booking.toJson());
+                            });
+                          } else if (bookingController.data.value != null) {
+                            logger.i(
+                                'Fetched Single Booking: ${bookingController.data.value}');
+                          } else {
+                            logger.w('No data found.');
+                          }
+                        } catch (e) {
+                          logger.e('Error while fetching bookings: $e');
+                        }
+                      },
+                      fixedSize: const Size(300, 60),
+                      child: Obx(() {
+                        return (isLoading.value)
+                            ? SizedBox(
+                                width: 20.w,
+                                height: 20.h,
+                                child: const CircularProgressIndicator())
+                            : Text(
+                                "Next",
+                                style: textTheme.bodyLarge!.copyWith(
+                                  color: Colors.white,
+                                ),
+                              );
+                      })),
                 ],
               ),
             )

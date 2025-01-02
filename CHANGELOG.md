@@ -81,3 +81,7 @@
 ## [0.6.3] - 2025-1-2
 ### Fixed
 - generic controller wrapping logic
+
+## [0.6.4] - 2025-1-2
+### Fixed
+- generic controller logic
