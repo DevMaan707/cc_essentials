@@ -22,8 +22,13 @@ class GenericController<T> extends get_package.GetxController {
       logger.i(response.data);
       if (response.statusCode == 200) {
         final rawData = response.data['data'];
-        logger.i("RAW $rawData");
-        data.value = modelMapper(rawData);
+        if (rawData is List) {
+          data.value = modelMapper({'data': rawData});
+        } else if (rawData is Map<String, dynamic>) {
+          data.value = modelMapper(rawData);
+        } else {
+          throw Exception("Unexpected data format: ${rawData.runtimeType}");
+        }
       } else {
         errorMessage.value =
             'Error with error code:${response.statusCode} bearing message : ${response.statusMessage}\n${response.data}';

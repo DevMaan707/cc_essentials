@@ -70,10 +70,14 @@
 ### Removed
 - removed login_controller and register controllers
 
-## [0.6.1] - 2024-12-29
+## [0.6.1] - 2025-1-1
 ### Added
 - API logs
 
-## [0.6.2] - 2024-12-29
+## [0.6.2] - 2025-1-1
 ### Added
 - API logs
+
+## [0.6.3] - 2025-1-2
+### Fixed
+- generic controller wrapping logic
