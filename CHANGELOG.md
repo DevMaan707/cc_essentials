@@ -86,6 +86,10 @@
 ### Fixed
 - generic controller logic
 
-## [0.6.6] - 2025-1-2
+## [0.6.7] - 2025-1-2
 ### Added
 - reactive text to otp bottom modal
+
+## [0.6.8] - 2025-1-2
+### Added
+- clearStack parameter to navigator
