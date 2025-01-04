@@ -85,3 +85,7 @@
 ## [0.6.4] - 2025-1-2
 ### Fixed
 - generic controller logic
+
+## [0.6.6] - 2025-1-2
+### Added
+- reactive text to otp bottom modal

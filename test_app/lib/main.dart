@@ -81,6 +81,7 @@ class HomeScreen extends StatelessWidget {
             CustomElevatedButton(
               onPressed: () {
                 OtpWidget.showOtpModal(
+                  isLoading: RxBool(false),
                   width: ScreenUtil().screenWidth,
                   titleTextStyle: textTheme.headlineMedium!.copyWith(
                       fontWeight: FontWeight.w600, color: Colors.white),

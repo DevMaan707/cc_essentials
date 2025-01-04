@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OtpWidget extends StatelessWidget {
+  final RxBool isLoading;
   final RxString otpValue;
   final int otpLength;
   final double fieldWidth;
@@ -46,6 +47,7 @@ class OtpWidget extends StatelessWidget {
   const OtpWidget({
     super.key,
     required this.otpValue,
+    required this.isLoading,
     this.otpLength = 6,
     this.fieldWidth = 50.0,
     this.fieldHeight = 56.0,
@@ -149,14 +151,22 @@ class OtpWidget extends StatelessWidget {
               child: CustomElevatedButton(
                 onPressed: onRegister,
                 fixedSize: verifySize,
-                child: Text(
-                  registerText ?? "Verify",
-                  style: registerTextStyle ??
-                      TextStyle(
-                        color: defaultColor ?? Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
+                child: Obx(() {
+                  return (isLoading.value)
+                      ? const SizedBox(
+                          width: 15,
+                          height: 15,
+                          child: CircularProgressIndicator(),
+                        )
+                      : Text(
+                          registerText ?? "Verify",
+                          style: registerTextStyle ??
+                              TextStyle(
+                                color: defaultColor ?? Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        );
+                }),
               ),
             ),
         ],
@@ -167,6 +177,7 @@ class OtpWidget extends StatelessWidget {
   static void showOtpModal({
     required BuildContext context,
     required RxString otpValue,
+    required RxBool isLoading,
     double? width,
     double? height,
     int otpLength = 6,
@@ -207,6 +218,7 @@ class OtpWidget extends StatelessWidget {
       ),
       builder: (context) {
         return OtpWidget(
+          isLoading: isLoading,
           width: width,
           title: title,
           helperText: helperText,
