@@ -1,5 +1,8 @@
 import 'package:cc_essentials/api_client/api_client.dart';
 import 'package:cc_essentials/cc_essentials.dart';
+import 'package:cc_essentials/chat/chat_screen.dart';
+import 'package:cc_essentials/chat/controller/chat_controller.dart';
+import 'package:cc_essentials/chat/models/chat_config.dart';
 import 'package:cc_essentials/helpers/generic_controller/generic_controller.dart';
 import 'package:cc_essentials/helpers/generic_service/generic_service.dart';
 import 'package:cc_essentials/helpers/logging/logger.dart';
@@ -13,12 +16,14 @@ import 'package:cc_essentials/ui/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:test_app/exModel.dart';
+import 'package:get_storage/get_storage.dart';
+import 'exModel.dart' as ex;
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   await CCEssentials.initialize(
     primaryColor: Colors.orange,
     accentColor: Colors.teal,
@@ -34,7 +39,7 @@ class MyTestApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Package Test App',
@@ -78,6 +83,21 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            CustomElevatedButton(
+              onPressed: () async {
+                final chatConfig = await ChatConfig(
+                  primaryColor: Colors.blue,
+                  secondaryColor: Colors.grey,
+                  saveToLocal: true,
+                  messagesPerPage: 20,
+                  isConversationEnd: (response) => response['isEnd'] == true,
+                );
+
+                Get.put(ChatController(config: chatConfig));
+                Get.to(ChatScreen());
+              },
+              child: const Text("Chat Screen"),
+            ),
             CustomElevatedButton(
               onPressed: () {
                 OtpWidget.showOtpModal(
@@ -174,13 +194,13 @@ class HomeScreen extends StatelessWidget {
                         GenericService(Get.find<ApiClient>());
                     logger.i(
                         '${countryCodes[selectedIndex.value]["code"]!}${phoneTextController.value.text}');
-                    final loginController = GenericController<Data>(
+                    final loginController = GenericController<ex.Data>(
                       fetchData: () => loginService
                           .postData(endpoint: '/v1/auth/provider/login', data: {
                         'phone':
                             '${countryCodes[selectedIndex.value]["code"]!}${phoneTextController.value.text}'
                       }),
-                      model: (data) => Data.fromJson(data),
+                      model: (data) => ex.Data.fromJson(data),
                     );
                     await loginController.fetchItems();
                     logger.i(loginController.data.value?.toJson() ?? '');
@@ -271,7 +291,7 @@ class HomeScreen extends StatelessWidget {
                               GenericService(Get.find<ApiClient>());
 
                           final bookingController =
-                              GenericController<BookingData>(
+                              GenericController<ex.BookingData>(
                             fetchData: () => bookingService.getData(
                               endpoint: '/v1/bookings/provider',
                               headers: {
@@ -279,7 +299,7 @@ class HomeScreen extends StatelessWidget {
                                     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lcmFsYXVkYUBzYWJzZWJhZGEuY29tIiwiZXhwIjoxNzM4NDI4ODAyLCJwaG9uZSI6Iis5MTk2NjIxMDU3MTAiLCJyb2xlIjoicHJvdmlkZXIiLCJ1aWQiOiI1MzB5MWw3NzhyIn0.l7Eb4M3BsBV97Dj6WVE8DmB_0r-0ypjpdzHSz9heoD8',
                               },
                             ),
-                            model: (json) => BookingData.fromJson(json),
+                            model: (json) => ex.BookingData.fromJson(json),
                           );
 
                           await bookingController.fetchItems();

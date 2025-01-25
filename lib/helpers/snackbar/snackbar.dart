@@ -145,8 +145,6 @@ class BubbleAnimationState extends State<BubbleAnimation>
         return Colors.red;
       case MessageType.info:
         return Colors.blue;
-      default:
-        return Colors.grey;
     }
   }
 
@@ -162,8 +160,6 @@ class BubbleAnimationState extends State<BubbleAnimation>
       case MessageType.info:
         icon = Icons.info;
         break;
-      default:
-        icon = Icons.help;
     }
     return Icon(icon, color: Colors.white);
   }

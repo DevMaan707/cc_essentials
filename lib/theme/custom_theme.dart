@@ -1,36 +1,5 @@
 import 'package:flutter/material.dart';
-
-enum FontFamily {
-  inter,
-  montserrat,
-  poppins,
-  nunito,
-  nunitoSans,
-  roboto,
-  lato,
-  openSans;
-
-  String get name {
-    switch (this) {
-      case FontFamily.inter:
-        return 'Inter';
-      case FontFamily.montserrat:
-        return 'Montserrat';
-      case FontFamily.poppins:
-        return 'Poppins';
-      case FontFamily.nunitoSans:
-        return 'NunitoSans';
-      case FontFamily.roboto:
-        return 'Roboto';
-      case FontFamily.lato:
-        return 'Lato';
-      case FontFamily.openSans:
-        return 'OpenSans';
-      case FontFamily.nunito:
-        return 'Nunito';
-    }
-  }
-}
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTheme {
   static late Color primaryColor;
@@ -38,7 +7,7 @@ class CustomTheme {
   static late Color lightBackgroundColor;
   static late Color darkBackgroundColor;
   static late Color errorColor;
-  static late FontFamily fontFamily;
+  static late TextStyle fontStyle;
 
   static void initialize({
     Color? primary,
@@ -46,14 +15,14 @@ class CustomTheme {
     Color? lightBackground,
     Color? darkBackground,
     Color? error,
-    FontFamily? font,
+    TextStyle? font,
   }) {
     primaryColor = primary ?? Colors.blue;
     accentColor = accent ?? Colors.blueAccent;
     lightBackgroundColor = lightBackground ?? Colors.white;
     darkBackgroundColor = darkBackground ?? Colors.black;
     errorColor = error ?? Colors.red;
-    fontFamily = font ?? FontFamily.roboto;
+    fontStyle = font ?? GoogleFonts.roboto();
   }
 
   static ThemeData lightTheme() {
@@ -120,42 +89,15 @@ class CustomTheme {
 
   static TextTheme _getTextTheme() {
     return TextTheme(
-      bodyLarge: TextStyle(
-        fontFamily: fontFamily.name,
-        fontWeight: FontWeight.normal,
-      ),
-      bodyMedium: TextStyle(
-        fontFamily: fontFamily.name,
-        fontWeight: FontWeight.normal,
-      ),
-      bodySmall: TextStyle(
-        fontFamily: fontFamily.name,
-        fontWeight: FontWeight.normal,
-      ),
-      headlineSmall: TextStyle(
-        fontFamily: fontFamily.name,
-        fontWeight: FontWeight.w500,
-      ),
-      headlineMedium: TextStyle(
-        fontFamily: fontFamily.name,
-        fontWeight: FontWeight.w500,
-      ),
-      headlineLarge: TextStyle(
-        fontFamily: fontFamily.name,
-        fontWeight: FontWeight.w600,
-      ),
-      titleSmall: TextStyle(
-        fontFamily: fontFamily.name,
-        fontWeight: FontWeight.bold,
-      ),
-      titleMedium: TextStyle(
-        fontFamily: fontFamily.name,
-        fontWeight: FontWeight.bold,
-      ),
-      titleLarge: TextStyle(
-        fontFamily: fontFamily.name,
-        fontWeight: FontWeight.bold,
-      ),
+      bodyLarge: fontStyle.copyWith(fontWeight: FontWeight.normal),
+      bodyMedium: fontStyle.copyWith(fontWeight: FontWeight.normal),
+      bodySmall: fontStyle.copyWith(fontWeight: FontWeight.normal),
+      headlineSmall: fontStyle.copyWith(fontWeight: FontWeight.w500),
+      headlineMedium: fontStyle.copyWith(fontWeight: FontWeight.w500),
+      headlineLarge: fontStyle.copyWith(fontWeight: FontWeight.w600),
+      titleSmall: fontStyle.copyWith(fontWeight: FontWeight.bold),
+      titleMedium: fontStyle.copyWith(fontWeight: FontWeight.bold),
+      titleLarge: fontStyle.copyWith(fontWeight: FontWeight.bold),
     );
   }
 
